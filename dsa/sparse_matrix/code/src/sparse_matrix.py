@@ -119,23 +119,22 @@ class SparseMatrix():
 
     def multiply(self, matrix_B):
 
-          if self.n_cols != matrix_B.n_rows:
+        if self.n_cols != matrix_B.n_rows:
 
+            raise ValueError("the columns of A is unequal to row")
+        result = SparseMatrix(self.n_rows, matrix_B.n_cols)
 
-              raise ValueError("the columns of A is unequal to row")
-          result = SparseMatrix(self.n_rows, matrix_B.n_cols)
+        for (i, k), val in self.data.items():
 
-          for (i, k), val in self.data.items():
+            for j in range(matrix_B.n_cols):
+                val2 = matrix_B.getElements(k, j)
+                if val2 != 0:
+                    curr = result.getElements(i, j)
+                    result.setElements(i, j, curr + val * val2)
+        return result
 
-             for j in range(matrix_B.n_cols):
-                 val2 = matrix_B.getElements(k, j)
-                 if val2 != 0:
-                     curr = result.getElements(i, j)
-                     result.setElements(i, j, curr + val * val2)
-          return result
-
-    #the method to write the result of substraction, addition or multiplication
-    #of two matrices to a disered file also entered by a user"""
+    # the method to write the result of substraction, addition or multiplication
+    # of two matrices to a disered file also entered by a user"""
 
     def write_to_file(self, file_path):
 
@@ -148,8 +147,10 @@ class SparseMatrix():
         except Exception:
             raise ValueError("no file found please provide one")
 
-#the main function to get inputs from user
-#and print the results according to user's preferences
+# the main function to get inputs from user
+# and print the results according to user's preferences
+
+
 def main():
 
     print("play with these operations\n")
@@ -174,7 +175,7 @@ def main():
             return
 
         result_file = input(
-                "enter a file path where to see your result:").strip()
+            "enter a file path where to see your result:").strip()
         result.write_to_file(result_file)
 
         print("successfull!! check your results here:", result_file)
