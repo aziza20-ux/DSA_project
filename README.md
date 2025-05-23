@@ -76,3 +76,7 @@ You will be prompted to enter:
 - No built-in libraries (like `numpy` or `regex`) are used to demonstrate fundamental data structure handling.
 - All operations are manually implemented to ensure full understanding and efficiency.
 
+👨‍🏫 Author & License
+
+Created by Aziza as part of the course assignment for Data Structures and Algorithms for Engineers.
+
